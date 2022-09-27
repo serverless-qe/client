@@ -35,7 +35,7 @@ for UPSTREAM_BRANCH in ${UPSTREAM_BRANCHES[@]}; do
   echo "found upstream branch: $UPSTREAM_BRANCH"
   UPSTREAM_TAG="knative-v$UPSTREAM_BRANCH.0"
   MIDSTREAM_BRANCH="release-v$UPSTREAM_BRANCH"
-  $(dirname "${BASH_SOURCE[0]}")/openshift/release/create-release-branch.sh "$UPSTREAM_TAG" "$MIDSTREAM_BRANCH"
+  $(dirname "${BASH_SOURCE[0]}")/create-release-branch.sh "$UPSTREAM_TAG" "$MIDSTREAM_BRANCH"
   # we would check the error code, but we 'set -e', so assume we're fine
   git push openshift "$MIDSTREAM_BRANCH"
 done
