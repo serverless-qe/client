@@ -52,6 +52,3 @@ fi
 git apply $PATCH_DIR/*
 git commit -am ":fire: Apply carried patches."
 
-# Fetch and generate required resources to enable faas as a plugin.
-# As a result two git commits are added. 
-update_faas_plugin
