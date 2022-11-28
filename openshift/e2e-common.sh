@@ -174,7 +174,7 @@ install_knative_serving_branch() {
   IMAGE_FORMAT='registry.ci.openshift.org/openshift/knative-nightly:${component}' install_knative || failed=1
   
   # Workaround default 'https' scheme
-  oc patch knativeserving.operator.knative.dev/knative-serving \
+  oc patch knativeserving knative-serving \
     --namespace knative-serving --type merge \
     --patch '{"spec":{"config":{"network":{"defaultExternalScheme":"http"}}}}' || return 1
   
