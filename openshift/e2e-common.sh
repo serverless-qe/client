@@ -167,7 +167,7 @@ install_knative_serving_branch() {
   local failed=0
   header "Installing Knative Serving from openshift/knative-serving branch $branch"
   rm -rf /tmp/knative-serving
-  git clone --branch $branch https://github.com/openshift/knative-serving.git /tmp/knative-serving || return 1
+  git clone --branch $branch https://github.com/openshift-knative/serving.git /tmp/knative-serving || return 1
   pushd /tmp/knative-serving
 
   source "openshift/e2e-common.sh"
@@ -176,7 +176,7 @@ install_knative_serving_branch() {
   # Workaround default 'https' scheme
   oc patch knativeserving knative-serving \
     --namespace knative-serving --type merge \
-    --patch '{"spec":{"config":{"network":{"defaultExternalScheme":"http"}}}}' || return 1
+    --patch '{"spec":{"config":{"network":{"default-external-scheme":"http"}}}}' || return 1
   
   popd
   return $failed
@@ -188,7 +188,7 @@ install_knative_eventing_branch() {
 
   header "Installing Knative Eventing from openshift/knative-eventing branch $branch"
   rm -rf /tmp/knative-eventing
-  git clone --branch $branch https://github.com/openshift/knative-eventing.git /tmp/knative-eventing || return 1
+  git clone --branch $branch https://github.com/openshift-knative/eventing.git /tmp/knative-eventing || return 1
   pushd /tmp/knative-eventing/
 
   create_knative_namespace eventing
@@ -220,9 +220,9 @@ install_serverless_operator_branch() {
   subheader "Successfully installed serverless operator."
   
   # Workaround default 'https' scheme
-  oc patch knativeserving.operator.knative.dev/knative-serving \
+  oc patch knativeserving knative-serving \
     --namespace knative-serving --type merge \
-    --patch '{"spec":{"config":{"network":{"defaultExternalScheme":"http"}}}}' || return 1
+    --patch '{"spec":{"config":{"network":{"default-external-scheme":"http"}}}}' || return 1
 
   header "Applying Strimzi Topic CR"
   cat <<-EOF | oc apply -n kafka -f - || failed=1
