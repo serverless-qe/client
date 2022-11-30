@@ -16,9 +16,9 @@
 
 CGO_ENABLED=0
 GOOS=linux
-TEST_IMAGES=$(shell find -L ./test/test_images ./vendor/knative.dev/serving/test/test_images/grpc-ping ./vendor/knative.dev/serving/test/test_images/multicontainer -mindepth 1 -maxdepth 2 -type f -name "*.go" -exec dirname {} \;)
+TEST_IMAGES=./test/test_images/helloworld ./vendor/knative.dev/serving/test/test_images/grpc-ping ./vendor/knative.dev/serving/test/test_images/multicontainer/servingcontainer ./vendor/knative.dev/serving/test/test_images/multicontainer/sidecarcontainer
 TEST=
-DOCKER_REPO_OVERRIDE=
+TEST_IMAGE_TAG ?= latest
 
 install: build
 	cp ./kn $(GOPATH)/bin
@@ -42,7 +42,7 @@ test-install:
 
 test-images:
 	for img in $(TEST_IMAGES); do \
-		KO_DOCKER_REPO=$(DOCKER_REPO_OVERRIDE) ko resolve --tags=latest -RBf $$img/ ; \
+		KO_DOCKER_REPO=$(DOCKER_REPO_OVERRIDE) ko build --tags=$(TEST_IMAGE_TAG) $(KO_FLAGS) -B $$img ; \
 	done
 .PHONY: test-images
 
