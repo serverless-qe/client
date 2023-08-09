@@ -30,7 +30,6 @@ OWNERS_ALIASES
 OWNERS
 Makefile
 package_cliartifacts.sh
-openshift-serverless-clients.spec
 EOT
 )
 
