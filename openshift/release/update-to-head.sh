@@ -69,7 +69,7 @@ if hash hub 2>/dev/null; then
    COUNT=$(hub api -H "Accept: application/vnd.github.v3+json" repos/${REPO_OWNER_NAME}/${REPO_NAME}/pulls --flat \
     | grep -c "${message}") || true
    if [ "$COUNT" = "0" ]; then
-      hub pull-request -m "${message}" -l "kind/sync-fork-to-upstream" -b ${REPO_OWNER_NAME}/${REPO_NAME}:${REPO_BRANCH} -h ${REPO_OWNER_NAME}/${REPO_NAME}:${REPO_BRANCH_CI}
+      hub pull-request -m "${message}" -l "kind/sync-fork-to-upstream,approved,lgtm" -b ${REPO_OWNER_NAME}/${REPO_NAME}:${REPO_BRANCH} -h ${REPO_OWNER_NAME}/${REPO_NAME}:${REPO_BRANCH_CI}
    fi
 else
    echo "hub (https://github.com/github/hub) is not installed, so you'll need to create a PR manually."
