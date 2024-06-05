@@ -20,13 +20,10 @@ ADD openshift/ci-operator/build-image/kubernetes.repo /etc/yum.repos.d/
 
 RUN yum install -y kubectl httpd-tools
 
+# Serverless-Operator `make generated-files` needs helm
+RUN curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
-RUN wget https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 && \
-    chmod 700 ./get-helm-3 && \
-    ./get-helm-3 --version v3.11.3 --no-sudo && helm version
-
-RUN wget -q https://github.com/mikefarah/yq/releases/download/3.4.1/yq_linux_amd64 -O /usr/bin/yq &&\
-    chmod +x /usr/bin/yq
+RUN GOFLAGS='' go install github.com/mikefarah/yq/v3@latest
 
 # Allow runtime users to add entries to /etc/passwd
 RUN chmod g+rw /etc/passwd
