@@ -1,4 +1,4 @@
-defaultBaseImage: gcr.io/distroless/static:nonroot
+defaultBaseImage: registry.access.redhat.com/ubi8/ubi-minimal:latest
 baseImageOverrides:
   knative.dev/client/cmd/kn: docker.io/library/alpine:latest
 builds:
