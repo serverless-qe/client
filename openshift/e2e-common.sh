@@ -31,7 +31,7 @@ readonly SERVING_BRANCH="release-next"
 readonly EVENTING_BRANCH="release-next"
 
 # The value should be updated once S-O release branch is cut
-readonly SERVERLESS_BRANCH="main"
+readonly SERVERLESS_BRANCH="serverless-1.33"
 
 # Determine if we're running locally or in CI.
 if [ -n "$OPENSHIFT_BUILD_NAMESPACE" ]; then

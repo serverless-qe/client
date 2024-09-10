@@ -29,6 +29,12 @@ pkg_tar() {
     	mv kn-darwin-amd64 ${OUTDIR}/${dir}/kn
       chmod +x ${OUTDIR}/${dir}/kn
       ;;
+    macos-arm64)
+      dir=macos-arm64
+      mkdir "${OUTDIR}/${dir}"
+      mv kn-darwin-arm64 ${OUTDIR}/${dir}/kn
+      chmod +x ${OUTDIR}/${dir}/kn
+      ;;
   esac
   cp LICENSE ${OUTDIR}/${dir}
   tar -zcf kn-${dir}.tar.gz -C ${OUTDIR}/${dir} .
@@ -49,4 +55,5 @@ pkg_tar arm64
 pkg_tar ppc64le
 pkg_tar s390x
 pkg_tar macos
+pkg_tar macos-arm64
 pkg_zip_for_windows
