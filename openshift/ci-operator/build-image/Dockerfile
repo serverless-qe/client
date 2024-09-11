@@ -1,33 +1,25 @@
-# Copyright 2019 The OpenShift Knative Authors
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+# DO NOT EDIT! Generated Dockerfile.
+
+FROM registry.ci.openshift.org/ocp/4.17:cli-artifacts as tools
 
 # Dockerfile to bootstrap build and test in openshift-ci
 FROM registry.ci.openshift.org/openshift/release:rhel-8-release-golang-1.22-openshift-4.17 as builder
 
-# Add kubernetes repository
-ADD openshift/ci-operator/build-image/kubernetes.repo /etc/yum.repos.d/
+ARG TARGETARCH
 
-RUN yum install -y kubectl httpd-tools
+COPY --from=tools /usr/share/openshift/linux_$TARGETARCH/oc.rhel8 /usr/bin/oc
 
-# Serverless-Operator `make generated-files` needs helm
-RUN curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+RUN ln -s /usr/bin/oc /usr/bin/kubectl
+
+RUN yum install -y httpd-tools
+
+RUN wget https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 && \
+    chmod 700 ./get-helm-3
+
+RUN ./get-helm-3 --version v3.11.3 --no-sudo && helm version
 
 RUN GOFLAGS='' go install github.com/mikefarah/yq/v3@latest
 
 # go install creates $GOPATH/.cache with root permissions, we delete it here
 # to avoid permission issues with the runtime users
 RUN rm -rf $GOPATH/.cache
-
-# Allow runtime users to add entries to /etc/passwd
-RUN chmod g+rw /etc/passwd

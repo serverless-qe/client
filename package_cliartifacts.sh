@@ -1,5 +1,5 @@
 # This script is used to package kn cross platform cli artifacts
-# for kn-cli-artifacts image
+# for cli-artifacts image
 # Copyright 2020 The OpenShift Knative Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");

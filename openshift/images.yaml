@@ -1,0 +1,5 @@
+knative.dev/client/cmd/kn: registry.ci.openshift.org/openshift/knative-eventing-kn:knative-v1.15
+knative.dev/client/test/test_images/helloworld: registry.ci.openshift.org/openshift/knative-eventing-test-helloworld:knative-v1.15
+knative.dev/serving/test/test_images/grpc-ping: registry.ci.openshift.org/openshift/knative-eventing-test-grpc-ping:knative-v1.15
+knative.dev/serving/test/test_images/multicontainer/servingcontainer: registry.ci.openshift.org/openshift/knative-eventing-test-servingcontainer:knative-v1.15
+knative.dev/serving/test/test_images/multicontainer/sidecarcontainer: registry.ci.openshift.org/openshift/knative-eventing-test-sidecarcontainer:knative-v1.15
