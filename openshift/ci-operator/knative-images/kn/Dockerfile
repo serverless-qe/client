@@ -26,6 +26,8 @@ LABEL \
       summary="Red Hat OpenShift Serverless 1 Eventing Kn" \
       maintainer="serverless-support@redhat.com" \
       description="Red Hat OpenShift Serverless 1 Eventing Kn" \
-      io.k8s.display-name="Red Hat OpenShift Serverless 1 Eventing Kn"
+      io.k8s.display-name="Red Hat OpenShift Serverless 1 Eventing Kn" \
+      io.k8s.description="Red Hat OpenShift Serverless Eventing Kn" \
+      io.openshift.tags="kn"
 
 ENTRYPOINT ["/ko-app/kn"]

@@ -26,6 +26,8 @@ LABEL \
       summary="Red Hat OpenShift Serverless 1 Eventing Vendor Knative.Dev Serving Test Test Images Multicontainer Servingcontainer" \
       maintainer="serverless-support@redhat.com" \
       description="Red Hat OpenShift Serverless 1 Eventing Vendor Knative.Dev Serving Test Test Images Multicontainer Servingcontainer" \
-      io.k8s.display-name="Red Hat OpenShift Serverless 1 Eventing Vendor Knative.Dev Serving Test Test Images Multicontainer Servingcontainer"
+      io.k8s.display-name="Red Hat OpenShift Serverless 1 Eventing Vendor Knative.Dev Serving Test Test Images Multicontainer Servingcontainer" \
+      io.k8s.description="Red Hat OpenShift Serverless Eventing Vendor Knative.Dev Serving Test Test Images Multicontainer Servingcontainer" \
+      io.openshift.tags="vendor-knative.dev-serving-test-test-images-multicontainer-servingcontainer"
 
 ENTRYPOINT ["/ko-app/servingcontainer"]

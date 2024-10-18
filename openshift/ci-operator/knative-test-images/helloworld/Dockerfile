@@ -26,6 +26,8 @@ LABEL \
       summary="Red Hat OpenShift Serverless 1 Eventing Test Test Images Helloworld" \
       maintainer="serverless-support@redhat.com" \
       description="Red Hat OpenShift Serverless 1 Eventing Test Test Images Helloworld" \
-      io.k8s.display-name="Red Hat OpenShift Serverless 1 Eventing Test Test Images Helloworld"
+      io.k8s.display-name="Red Hat OpenShift Serverless 1 Eventing Test Test Images Helloworld" \
+      io.k8s.description="Red Hat OpenShift Serverless Eventing Test Test Images Helloworld" \
+      io.openshift.tags="test-test-images-helloworld"
 
 ENTRYPOINT ["/ko-app/helloworld"]
