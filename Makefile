@@ -65,7 +65,7 @@ test-e2e-local:
 	./openshift/e2e-tests-local.sh $(TEST)
 .PHONY: test-e2e-local
 
-# Generates a ci-operator configuration for a specific branch.
-generate-ci-config:
-	./openshift/ci-operator/generate-ci-config.sh $(BRANCH) > ci-operator-config.yaml
-.PHONY: generate-ci-config
+# Generate an aggregated knative release yaml file, as well as a CI file with replaced image references
+generate-release:
+	./openshift/release/generate-release.sh
+.PHONY: generate-release
