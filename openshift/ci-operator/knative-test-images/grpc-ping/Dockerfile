@@ -1,6 +1,38 @@
-FROM openshift/origin-base
+# DO NOT EDIT! Generated Dockerfile for vendor/knative.dev/serving/test/test_images/grpc-ping.
+ARG GO_BUILDER=registry.ci.openshift.org/openshift/release:rhel-9-release-golang-1.25-openshift-4.21
+ARG GO_RUNTIME=registry.access.redhat.com/ubi9/ubi-minimal
+
+FROM $GO_BUILDER as builder
+
+WORKDIR /workspace
+COPY . .
+
+ENV CGO_ENABLED=1
+ENV GOEXPERIMENT=strictfipsruntime
+
+RUN go build -tags strictfipsruntime -o /usr/bin/main ./vendor/knative.dev/serving/test/test_images/grpc-ping
+
+FROM $GO_RUNTIME
+
+ARG VERSION=knative-v1.20
+
+COPY --from=builder /usr/bin/main /ko-app/grpc-ping
+COPY LICENSE /licenses/
+
 USER 65532
 
-ADD grpc-ping /ko-app/grpc-ping
+LABEL \
+      com.redhat.component="openshift-serverless-1-client-vendor-knative.dev-serving-test-test-images-grpc-ping-rhel9-container" \
+      name="openshift-serverless-1/client-vendor-knative.dev-serving-test-test-images-grpc-ping-rhel9" \
+      version=$VERSION \
+      summary="Red Hat OpenShift Serverless 1 Client Vendor Knative.Dev Serving Test Test Images Grpc Ping" \
+      maintainer="serverless-support@redhat.com" \
+      description="Red Hat OpenShift Serverless 1 Client Vendor Knative.Dev Serving Test Test Images Grpc Ping" \
+      io.k8s.display-name="Red Hat OpenShift Serverless 1 Client Vendor Knative.Dev Serving Test Test Images Grpc Ping" \
+      io.k8s.description="Red Hat OpenShift Serverless Client Vendor Knative.Dev Serving Test Test Images Grpc Ping" \
+      io.openshift.tags="vendor-knative.dev-serving-test-test-images-grpc-ping" \
+      vendor="Red Hat, Inc." \
+      release=$VERSION \
+      cpe="cpe:/a:redhat:openshift_serverless:1.XX::el9"
 
 ENTRYPOINT ["/ko-app/grpc-ping"]

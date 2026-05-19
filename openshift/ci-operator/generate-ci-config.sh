@@ -30,7 +30,7 @@ base_images:
   base:
     name: ubi-minimal
     namespace: ocp
-    tag: "8"
+    tag: "9"
 binary_build_commands: |
   TAG=${tag} make install
   TAG=${tag} make build-cross
