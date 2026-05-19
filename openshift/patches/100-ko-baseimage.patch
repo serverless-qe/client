@@ -1,0 +1,11 @@
+diff --git a/.ko.yaml b/.ko.yaml
+index ddbf8102f..52293b3da 100644
+--- a/.ko.yaml
++++ b/.ko.yaml
+@@ -1,4 +1,4 @@
+-defaultBaseImage: gcr.io/distroless/static:nonroot
++defaultBaseImage: registry.access.redhat.com/ubi8/ubi-minimal:latest
+ baseImageOverrides:
+   knative.dev/client/cmd/kn: docker.io/library/alpine:latest
+ builds:
+ 

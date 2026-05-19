@@ -1,0 +1,2 @@
+knative.dev/client/cmd/kn: registry.ci.openshift.org/openshift/knative-client-kn:knative-v1.22
+knative.dev/client/test/test_images/helloworld: registry.ci.openshift.org/openshift/knative-client-test-helloworld:knative-v1.22
