@@ -1,5 +1,5 @@
 # DO NOT EDIT! Generated Dockerfile for test/test_images/helloworld.
-ARG GO_BUILDER=registry.ci.openshift.org/openshift/release:rhel-8-release-golang-%!s(*string=0xc0006c8650)-openshift-4.17
+ARG GO_BUILDER=registry.ci.openshift.org/openshift/release:rhel-8-release-golang-1.25-openshift-4.21
 ARG GO_RUNTIME=registry.access.redhat.com/ubi8/ubi-minimal
 
 FROM $GO_BUILDER as builder
