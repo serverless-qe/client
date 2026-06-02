@@ -7,8 +7,7 @@ metadata:
   name: kn-client-cli-artifacts-115
 spec:
   componentName: kn-client-cli-artifacts-115
-  application: serverless-operator-135
-   
+  application: serverless-operator-135 
   source:
     git:
       url: https://github.com/openshift-knative/client.git

@@ -22,7 +22,7 @@ spec:
     - name: build-args
       value:
         - CLI_ARTIFACTS=brew.registry.redhat.io/rh-osbs/openshift-serverless-1-kn-cli-artifacts-rhel8:1.15.0
-        - GO_BUILDER=brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_8_golang_1.22
+        - GO_BUILDER=brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_8_golang_1.25
         - GO_RUNTIME=registry.access.redhat.com/ubi8/ubi-minimal
         - JAVA_BUILDER=registry.access.redhat.com/ubi8/openjdk-21
         - JAVA_RUNTIME=registry.access.redhat.com/ubi8/openjdk-21-runtime
