@@ -30,22 +30,36 @@ RUN tar --transform='flags=r;s|kn-linux-amd64|kn|' -zcf kn-linux-amd64.tar.gz kn
   && tar --transform='flags=r;s|kn-linux-s390x|kn|' -zcf kn-linux-s390x.tar.gz kn-linux-s390x LICENSE \
   && tar --transform='flags=r;s|kn-darwin-amd64|kn|' -zcf kn-macos-amd64.tar.gz kn-darwin-amd64 LICENSE \
   && tar --transform='flags=r;s|kn-linux-arm64|kn|' -zcf kn-linux-arm64.tar.gz kn-linux-arm64 LICENSE \
-  && tar --transform='flags=r;s|kn-darwin-arm64|kn|' -zcf kn-macos-arm64.tar.gz kn-darwin-arm64 LICENSE
+  && tar --transform='flags=r;s|kn-darwin-arm64|kn|' -zcf kn-macos-arm64.tar.gz kn-darwin-arm64 LICENSE \
+  && tar --transform='flags=r;s|kn-windows-amd64.exe|kn.exe|' -zcf kn-windows-amd64.tar.gz kn-windows-amd64.exe LICENSE
 
-RUN mkdir "windows" && mv kn-windows-amd64.exe ./windows/kn.exe && cp LICENSE ./windows/ && zip --quiet --junk-path - windows/* > kn-windows-amd64.zip
-
+RUN mkdir "windows" && cp kn-windows-amd64.exe ./windows/kn.exe && cp LICENSE ./windows/ && zip --quiet --junk-path - windows/* > kn-windows-amd64.zip
 # ---------- FINAL RUNTIME IMAGE ----------
 FROM $GO_RUNTIME
-RUN  mkdir -p /usr/share/kn/{linux_amd64,linux_arm64,linux_ppc64le,linux_s390x,macos_amd64,macos_arm64,windows}
 
-COPY --from=builder /workspace/kn-linux-amd64.tar.gz /usr/share/kn/linux_amd64/
-COPY --from=builder /workspace/kn-linux-ppc64le.tar.gz /usr/share/kn/linux_ppc64le/
-COPY --from=builder /workspace/kn-linux-s390x.tar.gz /usr/share/kn/linux_s390x/
-COPY --from=builder /workspace/kn-macos-amd64.tar.gz /usr/share/kn/macos_amd64/
+RUN mkdir -p \
+    /releases/kn/{linux_amd64,linux_arm64,linux_ppc64le,linux_s390x,macos_amd64,macos_arm64,windows} \
+    /usr/share/kn/{linux_amd64,linux_arm64,linux_ppc64le,linux_s390x,macos_amd64,macos_arm64,windows}
+
+COPY --from=builder /workspace/kn-linux-amd64.tar.gz /releases/kn/linux_amd64/
+COPY --from=builder /workspace/kn-linux-ppc64le.tar.gz /releases/kn/linux_ppc64le/
+COPY --from=builder /workspace/kn-linux-s390x.tar.gz /releases/kn/linux_s390x/
+COPY --from=builder /workspace/kn-macos-amd64.tar.gz /releases/kn/macos_amd64/
+COPY --from=builder /workspace/kn-windows-amd64.tar.gz  /releases/kn/windows/
+COPY --from=builder /workspace/kn-linux-arm64.tar.gz /releases/kn/linux_arm64/
+COPY --from=builder /workspace/kn-macos-arm64.tar.gz /releases/kn/macos_arm64/
+COPY --from=builder /workspace/LICENSE /releases/kn/LICENSE
 COPY --from=builder /workspace/kn-windows-amd64.zip  /usr/share/kn/windows/
-COPY --from=builder /workspace/kn-linux-arm64.tar.gz /usr/share/kn/linux_arm64/
-COPY --from=builder /workspace/kn-macos-arm64.tar.gz /usr/share/kn/macos_arm64/
-COPY --from=builder /workspace/LICENSE /licenses/
+
+# Backward compatibility for existing workflow that expect /usr/share/kn.
+RUN ln -s /releases/kn/linux_amd64/kn-linux-amd64.tar.gz     /usr/share/kn/linux_amd64/kn-linux-amd64.tar.gz && \
+    ln -s /releases/kn/linux_arm64/kn-linux-arm64.tar.gz     /usr/share/kn/linux_arm64/kn-linux-arm64.tar.gz && \
+    ln -s /releases/kn/linux_ppc64le/kn-linux-ppc64le.tar.gz /usr/share/kn/linux_ppc64le/kn-linux-ppc64le.tar.gz && \
+    ln -s /releases/kn/linux_s390x/kn-linux-s390x.tar.gz     /usr/share/kn/linux_s390x/kn-linux-s390x.tar.gz && \
+    ln -s /releases/kn/macos_amd64/kn-macos-amd64.tar.gz     /usr/share/kn/macos_amd64/kn-macos-amd64.tar.gz && \
+    ln -s /releases/kn/macos_arm64/kn-macos-arm64.tar.gz     /usr/share/kn/macos_arm64/kn-macos-arm64.tar.gz && \
+    ln -s /releases/kn/windows/kn-windows-amd64.tar.gz       /usr/share/kn/windows/kn-windows-amd64.tar.gz && \
+    ln -s /releases/kn/LICENSE                               /usr/share/kn/LICENSE
 
 USER 65532
 
