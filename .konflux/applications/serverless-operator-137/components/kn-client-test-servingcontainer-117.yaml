@@ -7,8 +7,7 @@ metadata:
   name: kn-client-test-servingcontainer-117
 spec:
   componentName: kn-client-test-servingcontainer-117
-  application: serverless-operator-137
-   
+  application: serverless-operator-137 
   source:
     git:
       url: https://github.com/openshift-knative/client.git
