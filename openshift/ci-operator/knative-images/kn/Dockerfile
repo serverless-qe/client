@@ -10,7 +10,7 @@ COPY . .
 ENV CGO_ENABLED=1
 ENV GOEXPERIMENT=strictfipsruntime
 
-ENV KN_PLUGIN_FUNC_UTIL_IMAGE=registry.redhat.io/openshift-serverless-1/kn-plugin-func-func-util-rhel9@sha256:5dbad2bc3b1b84d8e1eabaf2cb8d31e856a1ee8ac4bd573caf6d89f2c5c0ec96
+ENV KN_PLUGIN_FUNC_UTIL_IMAGE=registry.redhat.io/openshift-serverless-1/kn-plugin-func-func-util-rhel9@sha256:ae86f23a47019f1af6283d24d8777488ec5d1a2cf5e41508beac85d0804b84a8
 ENV KN_PLUGIN_EVENT_SENDER_IMAGE=registry.redhat.io/openshift-serverless-1/kn-plugin-event-sender-rhel9@sha256:56e905780f128a92904620f920dd8d025b628b810308bf343ccd31acd7d95276
 RUN go build -tags strictfipsruntime -o /usr/bin/main ./cmd/kn
 
