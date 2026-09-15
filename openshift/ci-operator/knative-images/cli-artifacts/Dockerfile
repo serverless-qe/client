@@ -1,5 +1,5 @@
 # Not generated yet!
-ARG GO_BUILDER=registry.ci.openshift.org/openshift/release:rhel-9-release-golang-1.23-openshift-4.19
+ARG GO_BUILDER=registry.ci.openshift.org/openshift/release:rhel-9-release-golang-1.26-openshift-4.23
 ARG GO_RUNTIME=registry.access.redhat.com/ubi9/ubi-minimal
 
 # ---------- BUILD STAGE ----------
