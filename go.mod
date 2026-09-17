@@ -303,6 +303,6 @@ replace (
 	github.com/imdario/mergo => dario.cat/mergo v1.0.1
 	k8s.io/client-go => k8s.io/client-go v0.31.4
 
-	knative.dev/func => github.com/openshift-knative/kn-plugin-func v1.1.3-0.20260121144514-fcfd8f76622b
+	knative.dev/func => github.com/openshift-knative/kn-plugin-func v1.1.3-0.20260916124120-1994f7a73b2d
 	knative.dev/kn-plugin-event => github.com/openshift-knative/kn-plugin-event v0.43.1-0.20250909142807-417eafe6248c
 )
