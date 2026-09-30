@@ -9,7 +9,7 @@ WORKDIR /workspace
 COPY . .
 ENV TAG="v1.17.0"
 ENV KN_PLUGIN_FUNC_UTIL_IMAGE=registry.redhat.io/openshift-serverless-1/kn-plugin-func-func-util-rhel9@sha256:e0bd47d1d208d4361263be0f7600205a2244bf1db652d7c445cdc1ec1d5dc5cf
-ENV KN_PLUGIN_EVENT_SENDER_IMAGE=registry.redhat.io/openshift-serverless-1/kn-plugin-event-sender-rhel9@sha256:c66984b36c6d645c8ca8e21f7fbce24ff3734411bedd6c507c67250dc42fc9d3
+ENV KN_PLUGIN_EVENT_SENDER_IMAGE=registry.redhat.io/openshift-serverless-1/kn-plugin-event-sender-rhel9@sha256:55bb43a31b2416dcd0fe7bf1a1d6188f4beec021d7e4d14bdba900ae2f55835c
 # Build binaries
 # RUN make build-cross-package
 RUN ./hack/build.sh -p linux amd64
