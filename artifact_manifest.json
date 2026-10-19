@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0",
+  "description": "OpenShift Serverless Client CLI artifacts for Konflux signing workflow",
+  "artifacts": [
+    {
+      "variant": "detached-signing",
+      "platform": "windows/amd64",
+      "description": "Windows CLI binary needing Authenticode signing",
+      "config": {
+        "output_filename": "kn-windows-amd64.zip",
+        "signing": {
+          "files": [
+            "kn.exe"
+          ]
+        }
+      },
+      "layers": [
+        {
+          "name": "windows-binary",
+          "description": "Windows CLI tarball source",
+          "files": [
+            "releases/kn/windows/kn-windows-amd64.tar.gz"
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "detached-signing",
+      "platform": "darwin/amd64",
+      "description": "macOS Intel binary needing Apple signing/notarization",
+      "config": {
+        "output_filename": "kn-macos-amd64.tar.gz",
+        "signing": {
+          "files": [
+            "kn"
+          ]
+        }
+      },
+      "layers": [
+        {
+          "name": "macos-intel-binary",
+          "description": "macOS Intel tarball source",
+          "files": [
+            "releases/kn/macos_amd64/kn-macos-amd64.tar.gz"
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "detached-signing",
+      "platform": "darwin/arm64",
+      "description": "macOS Apple Silicon binary needing Apple signing/notarization",
+      "config": {
+        "output_filename": "kn-macos-arm64.tar.gz",
+        "signing": {
+          "files": [
+            "kn"
+          ]
+        }
+      },
+      "layers": [
+        {
+          "name": "macos-arm-binary",
+          "description": "macOS ARM tarball source",
+          "files": [
+            "releases/kn/macos_arm64/kn-macos-arm64.tar.gz"
+          ]
+        }
+      ]
+    }
+  ]
+}
